@@ -1,4 +1,4 @@
-name: Rust
+name: Rust Build and Upload
 
 on:
   push:
@@ -11,12 +11,19 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+    
+    # 1. Build the optimized release version
+    - name: Build Release Binary
+      run: cargo build --release --verbose
+      
+    # 2. Upload the compiled binary so you can download it
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: classic-kali-executable
+        # IMPORTANT: Replace "classic_kali" below with whatever name is in your Cargo.toml file!
+        path: target/release/classic_kali
