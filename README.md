@@ -35,3 +35,40 @@ The best part? **It is entirely volatile.** No background daemons, no bloated pr
    ```bash
    sudo apt update
    sudo apt install rustc
+   ```
+
+2. **Compile the Source:**
+   Save the source code as `classic_kali.rs` and compile it into a standalone executable.
+   ```bash
+   rustc classic_kali.rs
+   ```
+
+---
+
+## 💻 Usage Protocol
+
+To initiate the retro session, simply execute the compiled binary as your standard user (do **not** run as root/sudo):
+
+```bash
+./classic_kali
+```
+
+**What happens next:**
+1. Your current window borders will instantly shift to the classic `Crux` thick white theme.
+2. A backup of your current terminal colors is silently saved.
+3. Open a **new terminal window**. It will launch in pure White-on-Black.
+4. Hack the planet. 
+
+### 🔄 To Revert
+
+You have two options to return to the modern "Kali-Dark" era:
+* **The automatic way:** Simply reboot or log out. The system will auto-revert and clean up all modified files automatically.
+* **The manual way:** If you want to revert without rebooting, run:
+  ```bash
+  xfconf-query -c xfwm4 -p /general/theme -s Kali-Dark
+  ```
+
+---
+
+## 📜 Disclaimer
+This script modifies user-level UI configurations and leaves your system's core functionality (`zsh`, tools, paths) 100% untouched. Your modern security and autocomplete features will remain fully functional behind the 2016 paint job. Use responsibly.
