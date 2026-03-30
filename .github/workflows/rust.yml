@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,14 +13,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    # 1. Build the optimized release version
-    - name: Build Release Binary
-      run: cargo build --release --verbose
+    # 1. Compile the single Rust file directly with optimization
+    - name: Compile with rustc
+      run: rustc classickali.rs -O -o classickali
       
     # 2. Upload the compiled binary so you can download it
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: classic-kali-executable
-        # IMPORTANT: Replace "classic_kali" below with whatever name is in your Cargo.toml file!
-        path: target/release/classic_kali
+        path: classickali
